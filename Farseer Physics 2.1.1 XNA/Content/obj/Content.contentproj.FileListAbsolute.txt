@@ -1,0 +1,4 @@
+C:\Users\genbox\Desktop\FP2.1\Farseer Physics 2.1 XNA\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\genbox\Desktop\New Folder\Farseer Physics 2.1 XNA\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\clients\pedlar\Farseer Physics 2.1.1 XNA\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\clients\pedlar\MarioTest\Farseer Physics 2.1.1 XNA\Content\obj\x86\Debug\ResolveAssemblyReference.cache
