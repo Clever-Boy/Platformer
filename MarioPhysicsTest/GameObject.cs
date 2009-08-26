@@ -21,7 +21,7 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace MarioPhysicsTest
 {
-    class GameObject
+    public class GameObject
     {
         public string ResourceName;
         public Geom Geom;
@@ -29,7 +29,7 @@ namespace MarioPhysicsTest
 
 
 
-        public Vector2 Position
+        public Vector2 Center
         {
             get
             {
@@ -63,6 +63,18 @@ namespace MarioPhysicsTest
             set
             {
                 Body.IsStatic = value;
+            }
+        }
+
+        public bool Enabled
+        {
+            get
+            {
+                return Body.Enabled;
+            }
+            set
+            {
+                Body.Enabled = value;
             }
         }
 

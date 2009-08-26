@@ -1,1 +1,2 @@
 C:\clients\pedlar\MarioTest\MarioPhysicsTest\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\clients\pedlar\Platformer\MarioPhysicsTest\Content\obj\x86\Debug\ResolveAssemblyReference.cache

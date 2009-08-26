@@ -17,6 +17,7 @@ using FarseerGames.FarseerPhysics.Dynamics;
 using FarseerGames.FarseerPhysics.Factories;
 using FarseerGames.FarseerPhysics.Interfaces;
 using FarseerGames.FarseerPhysics.Mathematics;
+using FarseerGames.FarseerPhysics.Dynamics.Joints;
 
 namespace MarioPhysicsTest
 {
@@ -25,68 +26,6 @@ namespace MarioPhysicsTest
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        public class Camera2d
-        {
-            private Vector2? position;
-            int width;
-            int height;
-            private Vector2? center;
-            public Vector2 Center
-            {
-                get
-                {
-                    if (this.center == null)
-                    {
-                        this.center = new Vector2(this.Position.X + width/2, this.Position.Y + height/2);
-                    }
-                    return center.Value;
-                }
-
-                set
-                {
-                    this.position = null;
-                    this.center = value;
-                }
-            }
-
-            public Vector2 Position
-            {
-                get
-                {
-                    if (this.position == null)
-                    {
-                        this.position = new Vector2(this.Center.X - width / 2, this.Center.Y - height / 2);
-                    }
-                    return position.Value;
-                }
-
-                set
-                {
-                    this.center = null;
-                    this.position = value;
-                }
-            }
-
-
-            public Camera2d(Vector2 position)
-            {
-                this.position = position;
-                width = 800;
-                height = 600;
-            }
-
-            public void Move(Vector2 p_moveVector)
-            {
-                position += p_moveVector;
-            }
-
-            public Vector2 GetScreenPosition(Vector2 spritePos)
-            {
-                return new Vector2(spritePos.X - Position.X, height-(spritePos.Y-Position.Y));
-            }
-
-        }
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -121,39 +60,35 @@ namespace MarioPhysicsTest
 
             phySim = new PhysicsSimulator(new Vector2(0, -200));
 
-            var ballObject = GameObjectFactory.CreateCircleGameObject(phySim, "ball", 22f, 2);
-            ballObject.Position = new Vector2(250, 400);
-            ballObject.Geom.FrictionCoefficient = 10;
+            var ballObject = GameObjectFactory.CreateCircleGameObject(phySim, "ball", 22f, 1);
+            ballObject.Center = new Vector2(250, 400);
+            ballObject.Geom.FrictionCoefficient = 0;
+
+            FixedAngleJoint asdf = new FixedAngleJoint(ballObject.Body, 0);
+            phySim.Add(asdf);
+
             player = ballObject;
             gameObjects.Add(ballObject);
 
             var platformObject = GameObjectFactory.CreateRectangleGameObject(phySim, "platform", 256, 64, 6);
             platformObject.IsStatic = true;
-            platformObject.Position = new Vector2(250, 300);
+            platformObject.Center = new Vector2(250, 300);
             platformObject.Rotation = MathHelper.ToRadians(-30f);
 
             var platformObject2 = GameObjectFactory.CreateRectangleGameObject(phySim, "platform", 256, 64, 6);
-            platformObject2.Position = new Vector2(5, 150);
+            platformObject2.Center = new Vector2(5, 150);
             platformObject2.Rotation = MathHelper.ToRadians(90f);
             platformObject2.Geom.FrictionCoefficient = 10;
 
-            gameObjects.Add(platformObject2);
-
             var floorObject = GameObjectFactory.CreateRectangleGameObject(phySim, "floor", 1024, 12, 1);
-            floorObject.Position = new Vector2(500, 0);
+            floorObject.Center = new Vector2(500, 0);
             floorObject.IsStatic = true;
-            floorObject.Geom.FrictionCoefficient = 500;
+            floorObject.Geom.FrictionCoefficient = 1;
 
-            var ceilingObject = GameObjectFactory.CreateRectangleGameObject(phySim, "floor", 1024, 12, 1);
-            ceilingObject.Position = new Vector2(500, 0);
-            ceilingObject.IsStatic = true;
-            ceilingObject.Geom.FrictionCoefficient = 5;
-
-            camera = new Camera2d(new Vector2(0, 0));
+            camera = new Camera2d(new Vector2(0, 0), new Vector2(800, 600), new Vector2(100, 100));
 
             gameObjects.Add(floorObject);
-
-
+            gameObjects.Add(platformObject2);
             gameObjects.Add(platformObject);
 
             base.Initialize();
@@ -195,7 +130,9 @@ namespace MarioPhysicsTest
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             var ks = Keyboard.GetState();
-            camera.Center = player.Geom.Position;
+            
+            camera.KeepOnScreen(player);
+
             if (ks.IsKeyDown(Keys.Left))
             {
                 player.Geom.Body.LinearVelocity = new Vector2(-250, player.Body.LinearVelocity.Y);
@@ -216,10 +153,14 @@ namespace MarioPhysicsTest
 
             if (ks.IsKeyDown(Keys.Up))
             {
-                player.Body.ApplyImpulse(new Vector2(0, 10));
+                player.Body.ApplyImpulse(new Vector2(0, 100));
             }
 
-            phySim.Update(gameTime.ElapsedGameTime.Milliseconds * .001f);
+            float split = (float)(gameTime.ElapsedGameTime.TotalMilliseconds * .001f)*2 / 3f;
+            for (int i = 1; i < 3; i++)
+            {
+                phySim.Update(split);
+            }
 
             base.Update(gameTime);
         }
@@ -232,14 +173,13 @@ namespace MarioPhysicsTest
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            //spriteBatch.Draw(assets["platform"], new Rectangle(0, 0, 256, 32), Color.White);
             foreach (var go in gameObjects)
             {
                 if (assets.ContainsKey(go.ResourceName))
                 {
                     var asset = assets[go.ResourceName];
 
-                    spriteBatch.Draw(asset, camera.GetScreenPosition(new Vector2(go.Position.X, go.Position.Y)), null, Color.White, -go.Rotation, new Vector2(asset.Width/2, asset.Height/2), 1f, SpriteEffects.None, 1f);
+                    spriteBatch.Draw(asset, camera.GetScreenPosition(new Vector2(go.Center.X, go.Center.Y)), null, Color.White, -go.Rotation, new Vector2(asset.Width/2, asset.Height/2), 1f, SpriteEffects.None, 1f);
                 }
             }
             spriteBatch.End();

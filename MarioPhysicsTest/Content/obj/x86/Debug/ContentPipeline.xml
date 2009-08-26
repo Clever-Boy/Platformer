@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\clients\pedlar\MarioTest\MarioPhysicsTest\bin\x86\Debug\Content\ball.xnb</Output>
-      <Time>2009-08-21T19:49:50.1222078-04:00</Time>
+      <Output>C:\clients\pedlar\Platformer\MarioPhysicsTest\bin\x86\Debug\Content\ball.xnb</Output>
+      <Time>2009-08-25T19:26:53.15625-04:00</Time>
     </Item>
     <Item>
       <Source>platform.png</Source>
@@ -16,17 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\clients\pedlar\MarioTest\MarioPhysicsTest\bin\x86\Debug\Content\platform.xnb</Output>
-      <Time>2009-08-21T19:49:50.1280668-04:00</Time>
-    </Item>
-    <Item>
-      <Source>TestLevel.xml</Source>
-      <Name>TestLevel</Name>
-      <Importer>XmlImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\clients\pedlar\MarioTest\MarioPhysicsTest\bin\x86\Debug\Content\TestLevel.xnb</Output>
-      <Time>2009-08-21T22:27:33.8944173-04:00</Time>
+      <Output>C:\clients\pedlar\Platformer\MarioPhysicsTest\bin\x86\Debug\Content\platform.xnb</Output>
+      <Time>2009-08-25T19:26:53.15625-04:00</Time>
     </Item>
     <Item>
       <Source>floor.bmp</Source>
@@ -34,18 +25,27 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\clients\pedlar\MarioTest\MarioPhysicsTest\bin\x86\Debug\Content\floor.xnb</Output>
-      <Time>2009-08-22T00:17:47.5931838-04:00</Time>
+      <Output>C:\clients\pedlar\Platformer\MarioPhysicsTest\bin\x86\Debug\Content\floor.xnb</Output>
+      <Time>2009-08-25T19:26:53.15625-04:00</Time>
+    </Item>
+    <Item>
+      <Source>TestLevel.xml</Source>
+      <Name>TestLevel</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\clients\pedlar\Platformer\MarioPhysicsTest\bin\x86\Debug\Content\TestLevel.xnb</Output>
+      <Time>2009-08-25T19:26:53.140625-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\clients\pedlar\MarioTest\MarioPhysicsTest\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\clients\pedlar\MarioTest\MarioPhysicsTest\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\clients\pedlar\MarioTest\MarioPhysicsTest\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\clients\pedlar\MarioTest\MarioPhysicsTest\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\clients\pedlar\Platformer\MarioPhysicsTest\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\clients\pedlar\Platformer\MarioPhysicsTest\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\clients\pedlar\Platformer\MarioPhysicsTest\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\clients\pedlar\Platformer\MarioPhysicsTest\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -73,8 +73,8 @@
         <Value>2009-05-28T00:16:06-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2009-08-18T17:36:00.358884-04:00</Value>
+        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2009-08-25T19:42:58.390625-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
